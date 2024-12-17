@@ -6,8 +6,13 @@ project('psm_encryptor', 'cpp',
 cpp = meson.get_compiler('cpp')
 dirbase = meson.current_source_dir()
 
+if build_machine.system() == 'darwin'
+libdir = join_paths(dirbase, 'lib/darwin64')
+inc = include_directories('include/darwin64')
+else
 libdir = join_paths(dirbase, 'lib/unix')
 inc = include_directories('include/unix')
+endif
 
 libcrypto_dep = cpp.find_library('libcrypto', dirs : libdir, static: true)
 libssl_dep = cpp.find_library('libssl', dirs : libdir, static: true)
