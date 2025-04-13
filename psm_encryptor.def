@@ -1,0 +1,4 @@
+LIBRARY psm_encryptor.dll
+EXPORTS
+scePsmGetVersion
+scePsmEdataEncrypt

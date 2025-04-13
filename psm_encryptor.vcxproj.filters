@@ -56,5 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="meson.build" />
+    <None Include="psm_encryptor.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
