@@ -14,8 +14,8 @@ libdir = join_paths(dirbase, 'lib/unix')
 inc = include_directories('include/unix')
 endif
 
-libcrypto_dep = cpp.find_library('libcrypto', dirs : libdir, static: true)
-libssl_dep = cpp.find_library('libssl', dirs : libdir, static: true)
+libcrypto_dep = cpp.find_library('crypto', dirs : libdir, static: true)
+libssl_dep = cpp.find_library('ssl', dirs : libdir, static: true)
 
 libpsm_encryptor = static_library('psm_encryptor',
         'HexKey.cpp',
