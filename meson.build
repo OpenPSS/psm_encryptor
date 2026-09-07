@@ -6,9 +6,13 @@ project('psm_encryptor', 'cpp',
 cpp = meson.get_compiler('cpp')
 dirbase = meson.current_source_dir()
 
-if build_machine.system() == 'darwin'
-libdir = join_paths(dirbase, 'lib/darwin64')
-inc = include_directories('include/darwin64')
+cargs = ['-D_PSM_SIGNTOOL_BUILD']
+largs = []
+if target_machine.system() == 'darwin'
+    cargs += ['-arch', 'arm64', '-arch', 'x86_64']
+    largs += ['-arch', 'arm64', '-arch', 'x86_64']
+    libdir = join_paths(dirbase, 'lib/darwin')
+    inc = include_directories('include/darwin')
 else
 libdir = join_paths(dirbase, 'lib/unix')
 inc = include_directories('include/unix')
@@ -29,6 +33,7 @@ libpsm_encryptor = static_library('psm_encryptor',
           libcrypto_dep,
           libssl_dep
         ],
-        cpp_args : '-D_PSM_SIGNTOOL_BUILD')
+        cpp_args : cargs,
+        link_args: largs)
 
 libpsm_encryptor_dep = declare_dependency(include_directories: inc, link_with: libpsm_encryptor)
